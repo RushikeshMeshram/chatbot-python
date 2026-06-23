@@ -1,10 +1,10 @@
 from langchain_huggingface import ChatHuggingFace,HuggingFaceEndpoint
 from langchain_core.messages import HumanMessage,AIMessage
 import streamlit as st
-from dotenv import load_dotenv
+# from dotenv import load_dotenv
 
-load_dotenv()
-
+# load_dotenv()
+api_key = st.secrets["HUGGINGFACEHUB_API_TOKEN"]
 st.title("🤖 Chatbot")
 
 temperature = st.sidebar.slider(
@@ -24,6 +24,7 @@ max_tokens = st.sidebar.slider(
 # Create a model endpoint
 llm = HuggingFaceEndpoint(
     repo_id="meta-llama/Llama-3.1-8B-Instruct",
+    huggingfacehub_api_token=api_key,
     temperature=temperature,
     max_new_tokens=max_tokens,
     task="text-generation"
